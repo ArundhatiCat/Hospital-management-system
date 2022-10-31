@@ -4,6 +4,8 @@
  */
 package sniperUI;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import sniperModel.CommunityDirectory;
 import sniperModel.Person;
@@ -284,6 +286,158 @@ public class NewPatient extends javax.swing.JPanel {
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
         // TODO add your handling code here:
+         //First name validation
+               if(fn.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(Create, "First name is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "^[a-zA-z]+([\\s][a-zA-Z]+)*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(fn.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(Create, "Please enter valid first name");
+                        return;
+                    }
+               }
+        //ID Validation
+               if(pid.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(Create, "ID is required");
+                    return;
+                }
+               else 
+               {
+                    String nameRegex = "^[1-9]\\d*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(pid.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(Create, "Please enter valid ID");
+                        return;
+                    }
+               }
+               if(this.pDir.ifIdExists(Integer.parseInt(pid.getText())))
+               {
+                   JOptionPane.showMessageDialog(Create, "This Id already exists, please enter new Id");
+                   return;
+               }
+               
+        //last name validation
+               if(ln.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(Create, "Last name is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "^[a-zA-z]+([\\s][a-zA-Z]+)*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(ln.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(Create, "Please enter valid last name");
+                        return;
+                    }
+               } 
+        //House Validation
+                if(ph.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(Create, "House Number is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^[1-9]\\d*(?:[ -]?(?:[a-zA-Z]+|[1-9]\\d*))?$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(ph.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(Create, "Please enter valid house number");
+                        return;
+                    }
+                }
+               
+        //Mobile Number Validation
+               if(pmobile.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(Create, "Mobile number is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "(0/91)?[7-9][0-9]{9}";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(pmobile.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(Create, "Please enter valid mobile number");
+                        return;
+                    }
+               } 
+        //City Validation
+                if(pcity.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(Create, "City is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^[a-zA-Z\\s]*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(pcity.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(Create, "Please enter valid City");
+                        return;
+                    }
+                }
+        //Email Validation
+               if(pmail.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(Create, "Email is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "^[\\w!#$%&'+/=?`{|}~^-]+(?:\\.[\\w!#$%&'+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(pmail.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(Create, "Please enter valid Email");
+                        return;
+                    }
+               } 
+               
+               
+         
+         
+                
+         //Community Validation
+                if(pcom.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(Create, "Community is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^[a-zA-Z\\s]*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(pcom.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(Create, "Please enter valid Community");
+                        return;
+                    }
+                }         
+        
+                
+       
         int id = Integer.parseInt(pid.getText());
         String fName = fn.getText();
         String lName = ln.getText();

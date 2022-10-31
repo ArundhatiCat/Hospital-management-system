@@ -16,6 +16,18 @@ public class DoctorDirectory {
     
     Map<Integer,Doctor> dDir = new HashMap();
     
+    public boolean ifIdExists(int i){
+        Set<Map.Entry<Integer,Doctor>> pList = dDir.entrySet();
+        
+        for(Map.Entry<Integer,Doctor> doc : pList){
+          int id=doc.getKey();
+          if(id==i)
+              return true;
+        }
+        return false;
+    }
+    
+    
     public void displayDoctorDir(){
         
         Set<Map.Entry<Integer,Doctor>> dList = dDir.entrySet();

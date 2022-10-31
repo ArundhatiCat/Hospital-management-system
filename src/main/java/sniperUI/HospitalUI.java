@@ -4,6 +4,8 @@
  */
 package sniperUI;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -301,6 +303,24 @@ public class HospitalUI extends javax.swing.JPanel {
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
         // TODO add your handling code here:
+          //Community Validation
+                if(Tname.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(Create, "Hospital name is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^[a-zA-Z\\s]*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Tname.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(Create, "Please enter valid Hospital name");
+                        return;
+                    }
+                }         
+        
         if(this.hDir.isEmpty()){
             hid = 1;
         }

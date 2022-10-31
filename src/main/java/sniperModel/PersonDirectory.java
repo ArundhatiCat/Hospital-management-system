@@ -16,6 +16,17 @@ public class PersonDirectory {
     
     Map<Integer,Person> pDir = new HashMap();
     
+    public boolean ifIdExists(int i){
+        Set<Map.Entry<Integer,Person>> pList = pDir.entrySet();
+        
+        for(Map.Entry<Integer,Person> doc : pList){
+          int id=doc.getKey();
+          if(id==i)
+              return true;
+        }
+        return false;
+    }
+    
     public void displayPersonDir(){
         
         Set<Map.Entry<Integer,Person>> pList = pDir.entrySet();

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sniperModel.Encounter;
@@ -517,6 +519,58 @@ public class AppDetails extends javax.swing.JPanel {
 
     private void AddVitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddVitalsActionPerformed
         // TODO add your handling code here:
+        // Blood Pressure Validation
+         if(Tbp.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(AddVitals, "Blood Pressure is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^\\d+$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Tbp.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(AddVitals, "Please enter valid Blood Pressure");
+                        return;
+                    }
+                }
+         //Temperature Validation
+         if(Ttem.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(AddVitals, "Temperature is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^\\d+$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Ttem.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(AddVitals, "Please enter valid Temperature");
+                        return;
+                    }
+                }
+         //Heart Rate Validation
+         if(Thr.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(AddVitals, "Heart Rate is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^\\d+$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Thr.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(AddVitals, "Please enter valid Heart Rate");
+                        return;
+                    }
+                }
+         
         try{
         Encounter en = new Encounter();
         if(this.enDir.isEmpty()){

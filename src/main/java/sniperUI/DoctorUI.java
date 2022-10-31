@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sniperModel.Doctor;
@@ -154,6 +156,12 @@ public class DoctorUI extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel7.setText("Hospital");
 
+        did.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                didActionPerformed(evt);
+            }
+        });
+
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel8.setText("User Name");
 
@@ -233,9 +241,8 @@ public class DoctorUI extends javax.swing.JPanel {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(mob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -386,7 +393,100 @@ public class DoctorUI extends javax.swing.JPanel {
 
     private void createDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDocActionPerformed
         // TODO add your handling code here:
-        
+        //First name validation
+               if(fn.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(createDoc, "First name is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "^[a-zA-z]+([\\s][a-zA-Z]+)*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(fn.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(createDoc, "Please enter valid first name");
+                        return;
+                    }
+               }
+               //ID Validation
+               if(did.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(createDoc, "ID is required");
+                    return;
+                }
+               else 
+               {
+                    String nameRegex = "^[1-9]\\d*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(did.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(createDoc, "Please enter valid ID");
+                        return;
+                    }
+               }
+               if(this.dDir.ifIdExists(Integer.parseInt(did.getText())))
+               {
+                   JOptionPane.showMessageDialog(createDoc, "This Id already exists, please enter new Id");
+                   return;
+               }
+               
+             //last name validation
+               if(ln.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(createDoc, "Last name is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "^[a-zA-z]+([\\s][a-zA-Z]+)*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(ln.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(createDoc, "Please enter valid last name");
+                        return;
+                    }
+               } 
+               
+               //Mobile Number Validation
+               if(mob.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(createDoc, "Mobile number is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "(0/91)?[7-9][0-9]{9}";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(mob.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(createDoc, "Please enter valid mobile number");
+                        return;
+                    }
+               } 
+               
+               //Email Validation
+               if(mail.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(createDoc, "Email is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "^[\\w!#$%&'+/=?`{|}~^-]+(?:\\.[\\w!#$%&'+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(mail.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(createDoc, "Please enter valid Email");
+                        return;
+                    }
+               } 
         id = Integer.parseInt(did.getText());
         fName = fn.getText();
         lName = ln.getText();
@@ -595,6 +695,10 @@ public class DoctorUI extends javax.swing.JPanel {
     private void HlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HlistActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_HlistActionPerformed
+
+    private void didActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_didActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_didActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

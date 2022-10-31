@@ -5,6 +5,8 @@
 
 package sniperUI;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -102,6 +104,11 @@ public class CommunityUI extends javax.swing.JPanel {
         jLabel3.setText("Community");
 
         Tcity.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        Tcity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TcityActionPerformed(evt);
+            }
+        });
 
         Tcom.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
 
@@ -283,6 +290,62 @@ public class CommunityUI extends javax.swing.JPanel {
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         // TODO add your handling code here:
+        
+        //House Validation
+                if(Th.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(create, "House Number is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^[1-9]\\d*(?:[ -]?(?:[a-zA-Z]+|[1-9]\\d*))?$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Th.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(create, "Please enter valid house number");
+                        return;
+                    }
+                }
+        //Community Validation
+                if(Tcom.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(create, "Community is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^[a-zA-Z\\s]*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Tcom.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(create, "Please enter valid Community");
+                        return;
+                    }
+                }         
+        
+        //City Validation
+                if(Tcity.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(create, "City is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^[a-zA-Z\\s]*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Tcity.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(create, "Please enter valid City");
+                        return;
+                    }
+                }
+ 
+                
+            
        city = Tcity.getText();
        com = Tcom.getText();
        hou = Th.getText();
@@ -468,6 +531,10 @@ public class CommunityUI extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Something went wrong. Please try again");
         }
     }//GEN-LAST:event_viewallActionPerformed
+
+    private void TcityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TcityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TcityActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

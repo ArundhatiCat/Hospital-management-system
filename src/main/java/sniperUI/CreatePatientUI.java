@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sniperModel.DoctorDirectory;
@@ -192,6 +194,11 @@ public class CreatePatientUI extends javax.swing.JPanel {
         Tage.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
 
         Tht.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        Tht.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ThtActionPerformed(evt);
+            }
+        });
 
         Twt.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
 
@@ -422,6 +429,58 @@ public class CreatePatientUI extends javax.swing.JPanel {
 
     private void BookAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookAppActionPerformed
         // TODO add your handling code here:
+        // Age Validation
+         if(Tage.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(BookApp, "Age is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^([0-9]|[1-9][0-9]|[1-9][0-1][0-9]|[1-9]2[0-2])$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Tage.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(BookApp, "Please enter valid Age");
+                        return;
+                    }
+                }
+         //Height Validation
+         if(Tht.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(BookApp, "Height is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^\\d+$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Tht.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(BookApp, "Please enter valid Height");
+                        return;
+                    }
+                }
+         //Weight Validation
+         if(Twt.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(BookApp, "Weight is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^\\d+$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(Twt.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(BookApp, "Please enter valid weight");
+                        return;
+                    }
+                }
+         
         try{
         SimpleDateFormat vlf = new SimpleDateFormat("dd-MM-yyyy");
         String sdt= vlf.format(Tdate.getDate());
@@ -450,6 +509,10 @@ public class CreatePatientUI extends javax.swing.JPanel {
             date = sdt;
             id = Integer.parseInt(pid.getText());
             Person p = this.pDir.getPerson(id);
+            String city= pcity.getText();
+            String commu= pcom.getText();
+            p.setCity(city);
+            p.setCom(commu);
             age = Integer.parseInt(Tage.getText());
             height = Integer.parseInt(Tht.getText());
             weight = Double.parseDouble(Twt.getText());
@@ -468,7 +531,9 @@ public class CreatePatientUI extends javax.swing.JPanel {
             this.patDir.addPatient(id, pat);
             this.patDir.displayPatientDir();
             clear();
+            this.pDir.addPerson(id, p);
         }
+        JOptionPane.showMessageDialog(this, "Appointment booked successfully!!");
         }catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Something went wrong. Please Try Agian!!");
@@ -538,6 +603,10 @@ public class CreatePatientUI extends javax.swing.JPanel {
     private void hosListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hosListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hosListActionPerformed
+
+    private void ThtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ThtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

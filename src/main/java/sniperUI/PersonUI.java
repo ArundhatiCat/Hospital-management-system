@@ -4,6 +4,8 @@
  */
 package sniperUI;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -145,6 +147,11 @@ public class PersonUI extends javax.swing.JPanel {
         jLabel11.setText("Community");
 
         fn.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        fn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnActionPerformed(evt);
+            }
+        });
 
         ln.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
 
@@ -422,6 +429,119 @@ public class PersonUI extends javax.swing.JPanel {
 
     private void CreatePerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePerActionPerformed
         // TODO add your handling code here:
+        //First name validation
+               if(fn.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(CreatePer, "First name is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "^[a-zA-z]+([\\s][a-zA-Z]+)*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(fn.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(CreatePer, "Please enter valid first name");
+                        return;
+                    }
+               }
+         //ID Validation
+         //id = Integer.parseInt(pid.getText());
+               if(pid.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(CreatePer, "ID is required");
+                    return;
+                }
+               else 
+               {
+                    String nameRegex = "^[1-9]\\d*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(pid.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(CreatePer, "Please enter valid ID");
+                        return;
+                    }
+               }
+               if(this.pDir.ifIdExists(Integer.parseInt(pid.getText())))
+               {
+                   JOptionPane.showMessageDialog(CreatePer, "This Id already exists, please enter new Id");
+                   return;
+               }
+               
+               
+         //last name validation
+               if(ln.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(CreatePer, "Last name is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "^[a-zA-z]+([\\s][a-zA-Z]+)*$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(ln.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(CreatePer, "Please enter valid last name");
+                        return;
+                    }
+               } 
+        //House Validation
+                if(ph.getText().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(CreatePer, "House Number is required");
+                    return;
+                }
+                else 
+                {
+                    String nameRegex = "^[1-9]\\d*(?:[ -]?(?:[a-zA-Z]+|[1-9]\\d*))?$";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(ph.getText());
+
+                    if(!nameMatcher.matches()){
+                        JOptionPane.showMessageDialog(CreatePer, "Please enter valid house number");
+                        return;
+                    }
+                }
+        //Mobile Number Validation
+               if(pmobile.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(CreatePer, "Mobile number is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "(0/91)?[7-9][0-9]{9}";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(pmobile.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(CreatePer, "Please enter valid mobile number");
+                        return;
+                    }
+               } 
+               
+        //Email Validation
+               if(pmail.getText().isEmpty()) 
+               {
+                    JOptionPane.showMessageDialog(CreatePer, "Email is required");
+                    return;
+                }else 
+               {
+                    String nameRegex = "^[\\w!#$%&'+/=?`{|}~^-]+(?:\\.[\\w!#$%&'+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
+                    Pattern namePattern = Pattern.compile(nameRegex);
+                    Matcher nameMatcher = namePattern.matcher(pmail.getText());
+
+                    if(!nameMatcher.matches())
+                    {
+                        JOptionPane.showMessageDialog(CreatePer, "Please enter valid Email");
+                        return;
+                    }
+               } 
+             
         id = Integer.parseInt(pid.getText());
         fName = fn.getText();
         lName = ln.getText();
@@ -649,6 +769,10 @@ public class PersonUI extends javax.swing.JPanel {
         for(String s : coml)
             CBcom.addItem(s);
     }//GEN-LAST:event_CBcityActionPerformed
+
+    private void fnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
