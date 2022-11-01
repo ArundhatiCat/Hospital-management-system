@@ -441,6 +441,7 @@ public class HospitalUI extends javax.swing.JPanel {
              clear();
              this.hDir.mergeMap(hD);
              this.hDir.displayHospitalDir();
+             JOptionPane.showMessageDialog(this, "Details Saved Successfully");
         }
         else{
             JOptionPane.showMessageDialog(this, "Table is Empty. Please add data!");
